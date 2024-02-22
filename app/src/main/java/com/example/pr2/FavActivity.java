@@ -28,5 +28,23 @@ public class FavActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RecyclerView churchesScreen = findViewById(R.id.churchesRecycler2);
+
+        DatabaseManager databaseManager = new DatabaseManager(this);
+        databaseManager.open();
+
+        List<Church> churches = databaseManager.getChurches();
+
+        churches.removeIf(church -> !Objects.equals(church.getFav(), 1));
+
+        ChurchAdapter churchAdapter = new ChurchAdapter(this, churches);
+        churchesScreen.setAdapter(churchAdapter);
+
+        databaseManager.close();
+
+    }
 }
 

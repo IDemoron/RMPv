@@ -3,11 +3,13 @@ package com.example.pr2;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +21,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChurchActivity extends AppCompatActivity {
+    private int fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_church);
-
+        this.fav = getIntent().getIntExtra("fav", 0);
+        System.out.println(this.fav);
         ImageView img = findViewById(R.id.churchAImg);
         byte[] byteArray = getIntent().getByteArrayExtra("img");
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -46,12 +50,40 @@ public class ChurchActivity extends AppCompatActivity {
         });
 
         ImageButton buttonFav = findViewById(R.id.mainfav);
-        buttonFav.setOnClickListener(new View.OnClickListener() {
+        buttonFav.setOnClickListener(v -> {
+            Intent intent = new Intent(ChurchActivity.this, FavActivity.class);
+            ChurchActivity.this.startActivity(intent);
+        });
+
+        ImageView favButton = findViewById(R.id.favButton);
+        favButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChurchActivity.this, FavActivity.class);
-                ChurchActivity.this.startActivity(intent);
+            public void onClick(View v){
+
+                if (fav == 0) {
+                    CharSequence text = "Добавлено в избранное!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                    toast.show();
+                    DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+                    databaseManager.open();
+                    databaseManager.setFav(getIntent().getIntExtra("id", 0), 1);
+                    fav = 1;
+                    databaseManager.close();
+                } else if (fav == 1) {
+                    CharSequence text = "Удалено из избранного!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                    toast.show();
+                    DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+                    databaseManager.open();
+                    databaseManager.setFav(getIntent().getIntExtra("id", 0), 0);
+                    fav = 0;
+                    databaseManager.close();
+                }
             }
+
         });
     }
 }

@@ -23,13 +23,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/sinagoga" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <ImageView
+            android:id="@+id/favButton"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_heartc"
+            android:background="@drawable/ic_heart"
             android:contentDescription="@string/toFav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

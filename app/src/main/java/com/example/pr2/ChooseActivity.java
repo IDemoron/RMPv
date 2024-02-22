@@ -44,30 +44,19 @@ public class ChooseActivity extends AppCompatActivity {
         super.onResume();
         RecyclerView churchesScreen = findViewById(R.id.churchesRecycler);
 
-        List<Church> churches = new ArrayList<>();
-        String churchType = getIntent().getStringExtra("churchType");
-        if (Objects.equals(churchType, "orthodox")) {
-            Church church = new Church(1, "Церковь Иоанна Предтечи", "ул. Горького 27", "7:00 - 19:00", "ioannpredtech.png");
-            churches.add(church);
-            church = new Church(2, "Храм Рождества Христова", "ул. Щорса 44А", "7:00 - 19:00", "rozhd.png");
-            churches.add(church);
-        } else if (Objects.equals(churchType, "catholic")) {
-            Church church = new Church(1, "Церковь Преображения Господня", "ул. Декабристов 20", "11:00 - 22:00", "preobraz.png");
-            churches.add(church);
-            church = new Church(2, "Церковь прихода святого Семейства", "ул. Солнечный бул., 5/4", "10:00 - 21:00", "semya.png");
-            churches.add(church);
-        } else if (Objects.equals(churchType, "islam")) {
-            Church church = new Church(1, "Соборная мечеть", "ул. Металлургов 65", "6:00 - 22:00", "mechet.png");
-            churches.add(church);
-        } else if (Objects.equals(churchType, "jews")) {
-            Church church = new Church(1, "Синагога", "ул. Сурикова 67", "9:00 - 17:00", "sinagoga.png");
-            churches.add(church);
+        DatabaseManager databaseManager = new DatabaseManager(this);
+        databaseManager.open();
 
-        }
+        List<Church> churches = databaseManager.getChurches();
 
+        String religion = getIntent().getStringExtra("churchType");
+
+        churches.removeIf(church -> !Objects.equals(church.getReligion(), religion));
 
         ChurchAdapter churchAdapter = new ChurchAdapter(this, churches);
         churchesScreen.setAdapter(churchAdapter);
+
+        databaseManager.close();
 
     }
 
