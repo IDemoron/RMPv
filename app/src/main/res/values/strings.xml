@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Pr2</string>
+    <string name="weather_degrees">-31°</string>
+    <string name="weather_state">пасмурно</string>
+    <string name="weather_icon">иконка погоды</string>
+    <string name="krsk_churches">Храмы Красноярска</string>
+    <string name="orthodox">Православие</string>
+    <string name="cath">Католичество</string>
+    <string name="islam">Ислам</string>
+    <string name="jews">Евреи</string>
+    <string name="back">Назад</string>
+    <string name="home">Домой</string>
+    <string name="fav">Избранное</string>
+    <string name="choose">Выберите храм</string>
+    <string name="ioannPr">Церковь Иоанна Предтечи</string>
+    <string name="ioannPrAd">ул. Горького 27</string>
+    <string name="rozhd">Храм Рождества Христова</string>
+    <string name="rozhdAd">ул. Щорса 44А</string>
+    <string name="church">Церковь</string>
+    <string name="sinagoga">Синагога</string>
+    <string name="street">ул. Сурикова 67</string>
+    <string name="hours">9:00 – 17:00</string>
+    <string name="circle">*</string>
+    <string name="map">Карта</string>
+    <string name="toFav">В избранное</string>
+</resources>
