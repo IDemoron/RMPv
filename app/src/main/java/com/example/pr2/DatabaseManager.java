@@ -29,12 +29,14 @@ public class DatabaseManager {
         List<Church> churches = new ArrayList<>();
         String[] columns = new String[] {DatabaseCreator.TABLE1_COLUMN1, DatabaseCreator.TABLE1_COLUMN2,
                 DatabaseCreator.TABLE1_COLUMN3, DatabaseCreator.TABLE1_COLUMN4, DatabaseCreator.TABLE1_COLUMN5,
-                DatabaseCreator.TABLE1_COLUMN6, DatabaseCreator.TABLE1_COLUMN7};
+                DatabaseCreator.TABLE1_COLUMN6, DatabaseCreator.TABLE1_COLUMN7, DatabaseCreator.TABLE1_COLUMN8,
+                DatabaseCreator.TABLE1_COLUMN9};
         Cursor cursor = sqlite.query(DatabaseCreator.TABLE1, columns, null,
                 null, null, null, null);
         while (cursor.moveToNext()){
             churches.add(new Church(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6)));
+                    cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6),
+                    cursor.getDouble(7), cursor.getDouble(8)));
         }
         cursor.close();
         return churches;

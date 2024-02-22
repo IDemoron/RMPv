@@ -17,6 +17,8 @@ public class DatabaseCreator extends SQLiteOpenHelper {
     public static final String TABLE1_COLUMN5 = "hours";
     public static final String TABLE1_COLUMN6 = "img";
     public static final String TABLE1_COLUMN7 = "fav";
+    public static final String TABLE1_COLUMN8 = "first";
+    public static final String TABLE1_COLUMN9 = "second";
 
     public DatabaseCreator(@Nullable Context context) {
         super(context, DATABASE_NAME, null, SCHEMA);
@@ -27,7 +29,8 @@ public class DatabaseCreator extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE1 + " (" + TABLE1_COLUMN1 + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TABLE1_COLUMN2 + " TEXT, " + TABLE1_COLUMN3 + " TEXT, " + TABLE1_COLUMN4 + " TEXT, "
-                + TABLE1_COLUMN5 + " TEXT, " + TABLE1_COLUMN6 + " TEXT, " + TABLE1_COLUMN7 + " INTEGER);");
+                + TABLE1_COLUMN5 + " TEXT, " + TABLE1_COLUMN6 + " TEXT, " + TABLE1_COLUMN7 + " INTEGER, "
+                + TABLE1_COLUMN8 + " REAL, " + TABLE1_COLUMN9 + " REAL);");
         initData(db);
     }
 
@@ -40,33 +43,33 @@ public class DatabaseCreator extends SQLiteOpenHelper {
     private void initData(SQLiteDatabase db) {
         db.execSQL("INSERT INTO " + TABLE1 + " (" + TABLE1_COLUMN2 + ", " + TABLE1_COLUMN3 + ", "
                 + TABLE1_COLUMN4 + ", " + TABLE1_COLUMN5 + ", " + TABLE1_COLUMN6 + ", "
-                + TABLE1_COLUMN7 + ") " +
+                + TABLE1_COLUMN7 + ", " + TABLE1_COLUMN8 + ", " + TABLE1_COLUMN9 + ") " +
                 "VALUES ('orthodox', 'Церковь Иоанна Предтечи', 'ул. Горького 27', '7:00 - 19:00'," +
-                " 'ioannpredtech.png', 0);");
+                " 'ioannpredtech.png', 0, 56.011474, 92.847927);");
         db.execSQL("INSERT INTO " + TABLE1 + " (" + TABLE1_COLUMN2 + ", " + TABLE1_COLUMN3 + ", "
                 + TABLE1_COLUMN4 + ", " + TABLE1_COLUMN5 + ", " + TABLE1_COLUMN6 + ", "
-                + TABLE1_COLUMN7 + ") " +
+                + TABLE1_COLUMN7 + ", " + TABLE1_COLUMN8 + ", " + TABLE1_COLUMN9 + ") " +
                 "VALUES ('orthodox', 'Храм Рождества Христова', 'ул. Щорса 44А', '7:00 - 19:00'," +
-                " 'rozhd.png', 0);");
+                " 'rozhd.png', 0, 55.993580, 92.953938);");
         db.execSQL("INSERT INTO " + TABLE1 + " (" + TABLE1_COLUMN2 + ", " + TABLE1_COLUMN3 + ", "
                 + TABLE1_COLUMN4 + ", " + TABLE1_COLUMN5 + ", " + TABLE1_COLUMN6 + ", "
-                + TABLE1_COLUMN7 + ") " +
+                + TABLE1_COLUMN7 + ", " + TABLE1_COLUMN8 + ", " + TABLE1_COLUMN9 + ") " +
                 "VALUES ('catholic', 'Церковь Преображения Господня', 'ул. Декабристов 20', '11:00 - 22:00'," +
-                " 'preobraz.png', 0);");
+                " 'preobraz.png', 0, 56.007594, 92.847460);");
         db.execSQL("INSERT INTO " + TABLE1 + " (" + TABLE1_COLUMN2 + ", " + TABLE1_COLUMN3 + ", "
                 + TABLE1_COLUMN4 + ", " + TABLE1_COLUMN5 + ", " + TABLE1_COLUMN6 + ", "
-                + TABLE1_COLUMN7 + ") " +
+                + TABLE1_COLUMN7 + ", " + TABLE1_COLUMN8 + ", " + TABLE1_COLUMN9 + ") " +
                 "VALUES ('catholic', 'Церковь прихода святого Семейства', 'ул. Солнечный бул., 5/4', '10:00 - 21:00'," +
-                " 'semya.png', 0);");
+                " 'semya.png', 0, 56.114922, 92.934642);");
         db.execSQL("INSERT INTO " + TABLE1 + " (" + TABLE1_COLUMN2 + ", " + TABLE1_COLUMN3 + ", "
                 + TABLE1_COLUMN4 + ", " + TABLE1_COLUMN5 + ", " + TABLE1_COLUMN6 + ", "
-                + TABLE1_COLUMN7 + ") " +
+                + TABLE1_COLUMN7 + ", " + TABLE1_COLUMN8 + ", " + TABLE1_COLUMN9 + ") " +
                 "VALUES ('islam', 'Соборная мечеть', 'ул. Металлургов 65 ', '6:00 - 22:00'," +
-                " 'mechet.png', 0);");
+                " 'mechet.png', 0, 56.042944, 92.943086);");
         db.execSQL("INSERT INTO " + TABLE1 + " (" + TABLE1_COLUMN2 + ", " + TABLE1_COLUMN3 + ", "
                 + TABLE1_COLUMN4 + ", " + TABLE1_COLUMN5 + ", " + TABLE1_COLUMN6 + ", "
-                + TABLE1_COLUMN7 + ") " +
+                + TABLE1_COLUMN7 + ", " + TABLE1_COLUMN8 + ", " + TABLE1_COLUMN9 + ") " +
                 "VALUES ('jews', 'Синагога', 'ул. Сурикова 67', '9:00 - 17:00'," +
-                " 'sinagoga.png', 0);");
+                " 'sinagoga.png', 0, 56.017327, 92.874257);");
     }
 }

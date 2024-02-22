@@ -69,6 +69,8 @@ public class ChurchAdapter extends RecyclerView.Adapter<ChurchAdapter.ChurchView
             intent.putExtra("hours", church.getHours());
             intent.putExtra("id", church.getId());
             intent.putExtra("fav", church.getFav());
+            intent.putExtra("first", church.getFirst());
+            intent.putExtra("second", church.getSecond());
 
             context.startActivity(intent);
         });

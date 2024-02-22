@@ -8,8 +8,18 @@ public class Church {
     private String hours;
     private String img;
     private int fav;
+    private double first;
+    private double second;
 
-    public Church(int id, String religion, String name, String address, String hours, String img, int fav){
+    public double getFirst() {
+        return first;
+    }
+
+    public double getSecond() {
+        return second;
+    }
+
+    public Church(int id, String religion, String name, String address, String hours, String img, int fav, double first, double second){
         this.id = id;
         this.religion = religion;
         this.name = name;
@@ -17,6 +27,8 @@ public class Church {
         this.hours = hours;
         this.img = img;
         this.fav = fav;
+        this.first = first;
+        this.second = second;
     }
 
     public int getId() {

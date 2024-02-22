@@ -1,9 +1,9 @@
 package com.example.pr2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,21 +12,48 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.yandex.mapkit.Animation;
+import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.geometry.Point;
+import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.map.MapObjectTapListener;
+import com.yandex.mapkit.map.PlacemarkMapObject;
+import com.yandex.mapkit.mapview.MapView;
+import com.yandex.runtime.image.ImageProvider;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Objects;
 
 public class ChurchActivity extends AppCompatActivity {
     private int fav;
+    private MapView mapView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_church);
+
+
+        MapKitFactory.initialize(this);
+        mapView = findViewById(R.id.mapViewYa);
+
+        double latitude = getIntent().getDoubleExtra("first", 0);
+        double longitude = getIntent().getDoubleExtra("second", 0);
+        Point point = new Point(latitude, longitude);
+        ImageProvider imageProvider = ImageProvider.fromResource(this, R.drawable.marker);
+
+        mapView.getMap().move(
+                new CameraPosition(point, 17.0f, 0.0f, 0.0f),
+                new Animation(Animation.Type.SMOOTH, 0),
+                null);
+
+        PlacemarkMapObject placemark = mapView.getMap().getMapObjects().addPlacemark(point, imageProvider);
+        placemark.setUserData(getIntent().getStringExtra("fieldTitle"));
+        placemark.addTapListener(mapObjectTapListener);
+
+
         this.fav = getIntent().getIntExtra("fav", 0);
         System.out.println(this.fav);
         ImageView img = findViewById(R.id.churchAImg);
@@ -54,6 +81,8 @@ public class ChurchActivity extends AppCompatActivity {
             Intent intent = new Intent(ChurchActivity.this, FavActivity.class);
             ChurchActivity.this.startActivity(intent);
         });
+
+
 
         ImageView favButton = findViewById(R.id.favButton);
         favButton.setOnClickListener(new View.OnClickListener()
@@ -84,7 +113,38 @@ public class ChurchActivity extends AppCompatActivity {
                 }
             }
 
+
+
         });
+
+}
+
+    private final MapObjectTapListener mapObjectTapListener = (mapObject, point) -> {
+        Toast toast = Toast.makeText(
+                getApplicationContext(),
+                Objects.requireNonNull(mapObject.getUserData()).toString(),
+                Toast.LENGTH_SHORT);
+        toast.show();
+        return true;
+    };
+
+    public void goBack(View view) {
+        finish();
     }
+
+    @Override
+    protected void onStop() {
+        mapView.onStop();
+        MapKitFactory.getInstance().onStop();
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MapKitFactory.getInstance().onStart();
+        mapView.onStart();
+    }
+
 }
 
